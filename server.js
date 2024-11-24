@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
+// Get all posts
 app.get("/posts", async (req, res) => {
   try {
     const allPost = await Post.find();
@@ -26,6 +27,25 @@ app.get("/posts", async (req, res) => {
     res.status(500).send("Error receiving posts:" + err);
   }
 });
+
+//Get a post
+app.get("/post/:postId", async (req, res) => {
+  try {
+    const post = await Post.find(req.params);
+    res.json(post);
+  } catch (err) {
+    res.status(500).send("Error receiving this post:" + err);
+  }
+});
+//delete a post
+
+//create user
+
+//login
+
+//get comments
+
+//create comment
 
 app.listen(port, () => {
   console.log("App launch on port : " + port + " All good");
