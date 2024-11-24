@@ -18,8 +18,13 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
-app.get("/posts", (req, res) => {
-  res.send("Get all posts");
+app.get("/posts", async (req, res) => {
+  try {
+    const allPost = await Post.find();
+    res.json(allPost);
+  } catch (err) {
+    res.status(500).send("Error receiving posts:" + err);
+  }
 });
 
 app.listen(port, () => {
